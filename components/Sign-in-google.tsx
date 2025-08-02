@@ -10,7 +10,7 @@ export default function SignInGoogle() {
         await signIn("google")
       }}
     >
-      <Button type="submit" className='cursor-pointer'><FcGoogle /> Signin with Google</Button>
+      <Button type="submit" className='w-full cursor-pointer'><FcGoogle /> Signin with Google</Button>
     </form>
   )
 } 
