@@ -1,7 +1,7 @@
 'use server'
 
 import connectToDb from './connectToDb'
-import { User, UserWithoutId } from './models'
+import { Notebook, User, UserWithoutId } from './models'
 import { revalidatePath } from 'next/cache'
 import bcrypt from 'bcryptjs'
 import { signOut } from '@/app/api/auth/auth'
@@ -19,6 +19,7 @@ export const addUser = async (formData: UserWithoutId) => {
       img,
       isAdmin,
     })
+    console.log(newUser)
     await newUser.save()
 
     revalidatePath('/')
@@ -102,5 +103,23 @@ export const resetPassword = async (formData: FormData) => {
   } finally {
     await signOut()
     redirect('/')
+  }
+}
+
+export const addNotebook = async (data:Notebook) => {
+  const {name, userId} =  data
+  try {
+    connectToDb()
+    const newNotebook = new Notebook({
+      name,
+      userId,
+    })
+    console.log(newNotebook)
+    await newNotebook.save()
+
+    revalidatePath('/dashboard')
+    return { status: 200 }
+  } catch (err) {
+    console.log(err)
   }
 }

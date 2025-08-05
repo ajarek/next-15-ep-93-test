@@ -8,6 +8,13 @@ export type User = {
   img: string
   isAdmin: boolean
 }
+
+export type Notebook = {
+  _id: string
+  name: string
+  userId: string
+}
+
 export type UserWithoutId = Omit<User, '_id'>
 
 const userSchema = new mongoose.Schema(
@@ -21,4 +28,15 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+const notebookSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, min: 3, max: 20 },
+    userId: { type: String, required: true },
+  },
+  { timestamps: true }
+)
+
 export const User = mongoose.models?.User || mongoose.model('User', userSchema)
+
+export const Notebook =
+  mongoose.models?.Notebook || mongoose.model('Notebook', notebookSchema)

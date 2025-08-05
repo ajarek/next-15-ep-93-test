@@ -88,7 +88,7 @@ export const HeroHeader = () => {
                                 <ModeToggle/>
                                 <Button
                                     asChild
-                                    variant="outline"
+                                    variant="success"
                                     size="sm"
                                     className={cn(isScrolled && 'lg:hidden')}>
                                     <Link href="/login">

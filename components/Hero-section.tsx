@@ -83,7 +83,7 @@ export default function HeroSection() {
                       size="lg"
                       className="rounded-xl px-5 text-base"
                     >
-                      <Link href="/dashboard">
+                      <Link href="/login">
                         <span className="text-nowrap">Start Forging</span>
                       </Link>
                     </Button>
