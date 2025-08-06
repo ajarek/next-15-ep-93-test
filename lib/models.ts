@@ -11,6 +11,7 @@ export type User = {
 
 export type Notebook = {
   _id: string
+
   name: string
   userId: string
 }

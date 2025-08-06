@@ -38,7 +38,7 @@ const Dashboard = async () => {
       </div>
       <div className='w-full h-full flex flex-col justify-start items-start gap-4 px-4'>
         <h1>Notebooks</h1>
-        <CreateNotebook {...session} />
+        <CreateNotebook session ={session} />
 
       </div>
     </div>

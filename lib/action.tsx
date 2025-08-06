@@ -106,8 +106,12 @@ export const resetPassword = async (formData: FormData) => {
   }
 }
 
-export const addNotebook = async (data:Notebook) => {
-  const {name, userId} =  data
+export const addNotebook = async (formData:FormData) => {
+  const name = formData.get('name') as string
+  const userId = formData.get('userId') as string
+  if (!name) {
+    return { error: 'Name is required' }
+  }
   try {
     connectToDb()
     const newNotebook = new Notebook({
@@ -118,7 +122,8 @@ export const addNotebook = async (data:Notebook) => {
     await newNotebook.save()
 
     revalidatePath('/dashboard')
-    return { status: 200 }
+    
+    
   } catch (err) {
     console.log(err)
   }

@@ -96,6 +96,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         ...session,
         user: {
           ...session.user,
+          id: token.id,
           name: token.name,
           email: token.email,
           image: token.image as string,
