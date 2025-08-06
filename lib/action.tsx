@@ -122,9 +122,20 @@ export const addNotebook = async (formData:FormData) => {
     await newNotebook.save()
 
     revalidatePath('/dashboard')
-    
+    connectToDb()
     
   } catch (err) {
     console.log(err)
   }
+}
+
+export const getNotebooks = async (userId: string)=>{
+  try{
+    await connectToDb()
+    const notebooks = await Notebook.find({userId})
+    return notebooks
+  }catch (err) {
+    console.log(err)
+
+}
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import { auth } from '@/app/api/auth/auth'
 import { redirect } from 'next/navigation'
@@ -6,13 +7,15 @@ import Image from 'next/image'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import ModeToggle from '@/components/ModeToggle'
 import CreateNotebook from '@/components/CreateNotebook'
-
+import { getNotebooks } from '@/lib/action'
+import Link  from 'next/link'
 const Dashboard = async () => {
   const session = await auth()
   console.log(session)
   if (!session) {
     redirect('/')
   }
+  const Notebooks = (await getNotebooks(session.user?.id || '')) as string[]
   return (
     <div className=' min-h-screen flex flex-col justify-start items-center gap-4 '>
       <div className='w-full h-16 flex items-center justify-between  border-b-2 px-4'>
@@ -38,8 +41,17 @@ const Dashboard = async () => {
       </div>
       <div className='w-full h-full flex flex-col justify-start items-start gap-4 px-4'>
         <h1>Notebooks</h1>
-        <CreateNotebook session ={session} />
-
+        <CreateNotebook session={session} />
+        <div>
+          
+          {Notebooks.map((note: any) => (
+            <div key={note._id.toString()}>
+              <Link href={`/notebook/${note._id}`}>
+                {note.name || ''}
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
