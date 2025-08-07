@@ -122,7 +122,7 @@ export const addNotebook = async (formData:FormData) => {
     await newNotebook.save()
 
     revalidatePath('/dashboard')
-    connectToDb()
+    return { status: 200 }
     
   } catch (err) {
     console.log(err)

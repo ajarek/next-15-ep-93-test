@@ -30,7 +30,7 @@ const CreateNotebook = ({session}: {session: Session}) => {
             'use server'
             const result = await addNotebook(formData)
             if (result?.error) {
-              // Handle error case if needed
+              
               return
             }
           }}
