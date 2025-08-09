@@ -136,6 +136,35 @@ export const getNotebooks = async (userId: string)=>{
     return notebooks
   }catch (err) {
     console.log(err)
-
+  }
 }
+
+export const getNotebookById = async (id: string) => {
+  try {
+    await connectToDb()
+    const notebook = await Notebook.findById(id)
+    return notebook
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const updateNotebook = async (id: string, name: string, column: string) => {
+  if (!name) {
+    return { error: 'Name is required' }
+  }
+  
+  try {
+    await connectToDb()
+    await Notebook.findByIdAndUpdate(id, {
+      name,
+      column
+    })
+    
+    revalidatePath('/dashboard')
+    return { status: 200 }
+  } catch (err) {
+    console.log(err)
+    return { error: 'Failed to update notebook' }
+  }
 }

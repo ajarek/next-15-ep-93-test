@@ -11,9 +11,9 @@ export type User = {
 
 export type Notebook = {
   _id: string
-
   name: string
   userId: string
+  column?: string
 }
 
 export type UserWithoutId = Omit<User, '_id'>
@@ -33,6 +33,7 @@ const notebookSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, min: 3, max: 20 },
     userId: { type: String, required: true },
+    column: { type: String, default: '1' }, // Domyślnie 'Planned'
   },
   { timestamps: true }
 )
