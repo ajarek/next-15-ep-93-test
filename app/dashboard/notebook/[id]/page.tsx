@@ -1,14 +1,15 @@
 import React from 'react'
 import { auth } from '@/app/api/auth/auth'
 import { redirect } from 'next/navigation'
-import { getNotebookById } from '@/lib/action'
+import { deleteNotebook, getNotebookById, updateNotebook } from '@/lib/action'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription,  CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import Navbar from '@/components/Navbar'
+
 
 const columns = [
   { id: '1', name: 'Planned', color: '#6B7280' },
@@ -23,10 +24,10 @@ const EditNotebook = async ({ params }: { params: { id: string } }) => {
     redirect('/')
   }
 
-  // Pobierz dane notatnika
+  
   const notebook = await getNotebookById(params.id)
   
-  // Konwersja obiektu MongoDB na prosty obiekt JavaScript
+  
   const notebookData = notebook ? {
     _id: notebook._id.toString(),
     name: notebook.name,
@@ -42,14 +43,26 @@ const EditNotebook = async ({ params }: { params: { id: string } }) => {
     <div className=' min-h-screen flex flex-col justify-start items-center gap-4 '>
       <Navbar label=' > Notebook'/>
       <h1 className="text-2xl font-bold mb-6">Edit Notebook</h1>
-      
+      <form action={async (formData: FormData) => {
+        'use server'
+        await deleteNotebook(formData);
+        redirect('/dashboard')
+      }}>
+         <input type="hidden" name="id" value={notebookData._id} />
+        <Button variant="destructive">Delete Notebook</Button>
+      </form>
+     
       <Card className="w-full max-w-md mx-auto">
         <CardHeader>
           <CardTitle>Edit Notebook</CardTitle>
           <CardDescription>Make changes to your notebook here.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form action="/api/update-notebook" method="POST">
+          <form action={async (formData:FormData) => {
+            'use server'
+            await updateNotebook(formData);
+            redirect('/dashboard')
+          }}>
             <input type="hidden" name="id" value={notebookData._id} />
             
             <div className="grid w-full items-center gap-4">

@@ -10,6 +10,8 @@ import KanbanNotebooks from '@/components/KanbanNootebooks'
 type Notebook = {
   _id: string
   name?: string
+  column?: number
+
 }
 
 const Dashboard = async () => {
@@ -32,9 +34,8 @@ const Dashboard = async () => {
       <div className='w-full h-full flex flex-col justify-start items-start gap-4 px-4'>
         <h1>Notebooks</h1>
         <CreateNotebook session={session} />
-        <KanbanNotebooks notebooks={Notebooks.map((notebook, index) => ({
-          key: index,
-
+        <KanbanNotebooks notebooks={Notebooks.map((notebook) => ({
+          key: notebook._id, // Add unique key prop
           _id: notebook._id,
           name: notebook.name || '' // Ensure name is always a string
         }))} />

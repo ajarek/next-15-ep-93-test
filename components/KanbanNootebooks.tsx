@@ -58,7 +58,8 @@ const KanbanNotebooks = ({ notebooks = [] }: KanbanNotebooksProps) => {
   const [features, setFeatures] = useState(initialFeatures)
   const [edit, setEdit] = useState(false)
   return (
-    <div>
+    <div className='w-full '> 
+
       <Button
         className={
           edit

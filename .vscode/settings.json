@@ -1,0 +1,99 @@
+{
+  "files.autoSave": "afterDelay",
+  "editor.fontSize": 15,
+  "editor.tabSize": 2,
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingQuotes": "always",
+  "workbench.sideBar.location": "right",
+  "terminal.integrated.fontSize": 14,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.codeActionsOnSave.rules": null,
+  "files.associations": {
+    "*.js": "javascriptreact",
+    "*.jsx": "javascriptreact"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.startupEditor": "none",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  "eslint.execArgv": null,
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescriptreact",
+    "html",
+    "vue",
+    "markdown"
+  ],
+  "eslint.run": "onSave",
+  "files.defaultLanguage": "javascriptreact",
+  "git.confirmSync": false,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "git.enableSmartCommit": true,
+  "eslint.format.enable": true,
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#FF3D00",
+    "activityBar.foreground": "#000000",
+    "activityBar.activeBackground": "#0dff00",
+    "statusBar.border": "#FF3D00",
+    "statusBar.background": "#FF3D00",
+    "statusBar.foreground": "#ffffff",
+    "statusBarItem.activeBackground": "#0dff00",
+    "titleBar.activeBackground": "#FF3D00",
+    "terminal.foreground": "#0dff00",
+    "terminal.background": "#000000",
+    "terminalCursor.foreground": "#FF3D00"
+  },
+  "cSpell.userWords": [
+    "allblogs",
+    "cloudinary",
+    "Espana",
+    "ilość",
+    "Jarek",
+    "Jobster",
+    "listreceiver",
+    "microfala",
+    "nextui",
+    "pinterest",
+    "samochodzik",
+    "tanstack",
+    "zustand"
+  ],
+  "prettier.jsxSingleQuote": true,
+  "prettier.semi": false,
+  "prettier.singleAttributePerLine": true,
+  "prettier.singleQuote": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  "cSpell.language": "en,pl",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.accessibilitySupport": "off",
+  "explorer.confirmDelete": false,
+  "vsicons.dontShowNewVersionMessage": true,
+  "javascript.suggest.paths": false,
+  "editor.inlineSuggest.suppressSuggestions": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "window.zoomLevel": 1,
+  "workbench.editorAssociations": {
+    "*.webp": "imagePreview.previewEditor"
+  },
+  "editor.stickyScroll.enabled": false,
+  "cSpell.ignoreWords": ["hitbox"],
+  "workbench.colorTheme": "Default High Contrast",
+  "editor.wrappingIndent": "indent",
+  "editor.wordWrap": "on"
+}

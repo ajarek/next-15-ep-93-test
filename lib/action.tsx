@@ -109,6 +109,7 @@ export const resetPassword = async (formData: FormData) => {
 export const addNotebook = async (formData:FormData) => {
   const name = formData.get('name') as string
   const userId = formData.get('userId') as string
+  const column = formData.get('column') as string
   if (!name) {
     return { error: 'Name is required' }
   }
@@ -117,6 +118,7 @@ export const addNotebook = async (formData:FormData) => {
     const newNotebook = new Notebook({
       name,
       userId,
+      column,
     })
     console.log(newNotebook)
     await newNotebook.save()
@@ -149,14 +151,30 @@ export const getNotebookById = async (id: string) => {
   }
 }
 
-export const updateNotebook = async (id: string, name: string, column: string) => {
+export const deleteNotebook = async (formData: FormData) => {
+  const id = formData.get('id') as string
+  try {
+    await connectToDb()
+    await Notebook.findByIdAndDelete(id)
+    revalidatePath('/dashboard')
+    console.log(`Deleted notebook ${id}`)
+    return { status: 200 }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const updateNotebook = async (formData: FormData) => {
+  const _id = formData.get('id') as string
+  const name = formData.get('name') as string
+  const column = formData.get('column') as string
   if (!name) {
     return { error: 'Name is required' }
   }
   
   try {
     await connectToDb()
-    await Notebook.findByIdAndUpdate(id, {
+    await Notebook.findByIdAndUpdate(_id, {
       name,
       column
     })

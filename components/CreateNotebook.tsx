@@ -15,6 +15,7 @@ import { Input } from './ui/input'
 import { addNotebook } from '@/lib/action'
 import Form from 'next/form'
 import { Session } from 'next-auth'
+import { redirect } from 'next/navigation'
 
 
 const CreateNotebook = ({session}: {session: Session}) => {
@@ -33,6 +34,8 @@ const CreateNotebook = ({session}: {session: Session}) => {
               
               return
             }
+            redirect('/dashboard')
+
           }}
         >
           <DialogHeader>
@@ -46,6 +49,11 @@ const CreateNotebook = ({session}: {session: Session}) => {
               type='hidden'
               name='userId'
               value={session.user?.id}
+            />
+            <input
+              type='hidden'
+              name='column'
+              value='1'
             />
             <Label htmlFor='name-1'>Name</Label>
             <Input

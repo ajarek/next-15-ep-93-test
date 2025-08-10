@@ -1,10 +1,10 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/App-sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
+import AppSidebar  from "@/components/App-sidebar"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar searchParams={Promise.resolve({ name: '' })} />
       <main className="w-full">
         
         {children}
