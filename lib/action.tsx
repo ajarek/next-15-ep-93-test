@@ -135,9 +135,11 @@ export const getNotebooks = async (userId: string)=>{
   try{
     await connectToDb()
     const notebooks = await Notebook.find({userId})
-    return notebooks
+    // Konwertuj dokumenty MongoDB na zwykłe obiekty JavaScript
+    return JSON.parse(JSON.stringify(notebooks))
   }catch (err) {
     console.log(err)
+    return []
   }
 }
 
@@ -145,9 +147,11 @@ export const getNotebookById = async (id: string) => {
   try {
     await connectToDb()
     const notebook = await Notebook.findById(id)
-    return notebook
+    // Konwertuj dokument MongoDB na zwykły obiekt JavaScript
+    return JSON.parse(JSON.stringify(notebook))
   } catch (err) {
     console.log(err)
+    return null
   }
 }
 

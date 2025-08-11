@@ -92,11 +92,10 @@ const KanbanNotebooks = ({ notebooks = [] }: KanbanNotebooksProps) => {
             </KanbanHeader>
             <KanbanCards id={column.id}>
               {(feature: (typeof features)[number]) => (
-                <div className='relative'>
+                <div className='relative' key={feature.id}>
                   <KanbanCard
                     column={column.id}
                     id={feature.id}
-                    key={feature.id}
                     name={feature.name}
                   >
                     <div className='flex items-start justify-between gap-2'>

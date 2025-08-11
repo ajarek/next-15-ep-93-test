@@ -12,11 +12,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getNotebooks } from '@/lib/action'
 import { auth } from '@/app/api/auth/auth'
-import SearchNotebook from './SearchNotebook'
+import NotebooksList from './NotebooksList'
 
-const  AppSidebar= async ({searchParams,}: { searchParams: Promise<{ name: string }>}) =>{
-
-const { name } = (await searchParams) || {}
+const AppSidebar = async () => {
   const session = await auth()
   if (!session) {
     redirect('/')
@@ -41,23 +39,7 @@ const { name } = (await searchParams) || {}
         </Link>
       </SidebarHeader>
       <SidebarContent>
-        <div className='p-4 space-y-4'>
-          <h2>
-
-          Number of notebooks {notebooksData?.length} 
-          </h2>
-        <SearchNotebook query='name' />
-       </div>
-
-        <div className='p-4'>
-          <p>Notebook list:</p>
-          {notebooksData?.filter((notebook: { name: string }) => notebook.name.toUpperCase().includes(name?.toUpperCase())|| !name) 
-          .map((notebook: { _id: string, name: string }) => (
-            <div key={notebook._id} className='font-semibold space-y-2'>
-              {notebook.name}
-            </div>
-          ))}
-        </div>
+        <NotebooksList notebooksData={notebooksData || []} />
 
         <SidebarGroup />
         <SidebarGroup />
