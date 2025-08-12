@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import Navbar from '@/components/Navbar'
-
+import { Textarea } from "@/components/ui/textarea"
 
 const columns = [
   { id: '1', name: 'Planned', color: '#6B7280' },
@@ -19,20 +19,21 @@ const columns = [
 
 const EditNotebook = async ({ params }: { params: { id: string } }) => {
   const session = await auth()
-
+  const {id} = params
   if (!session) {
     redirect('/')
   }
 
   
-  const notebook = await getNotebookById(params.id)
+  const notebook = await getNotebookById(id)
   
   
   const notebookData = notebook ? {
     _id: notebook._id.toString(),
     name: notebook.name,
     userId: notebook.userId,
-    column: notebook.column || '1'
+    column: notebook.column || '1',
+    content: notebook.content || '',
   } : null
 
   if (!notebookData) {
@@ -43,6 +44,7 @@ const EditNotebook = async ({ params }: { params: { id: string } }) => {
     <div className=' min-h-screen flex flex-col justify-start items-center gap-4 '>
       <Navbar label=' > Notebook'/>
       <h1 className="text-2xl font-bold mb-6">Edit Notebook</h1>
+      <div className='flex items-center gap-4'>
       <form action={async (formData: FormData) => {
         'use server'
         await deleteNotebook(formData);
@@ -51,7 +53,8 @@ const EditNotebook = async ({ params }: { params: { id: string } }) => {
          <input type="hidden" name="id" value={notebookData._id} />
         <Button variant="destructive">Delete Notebook</Button>
       </form>
-     
+      <Link href={`/dashboard/notebook/content/${params.id}`} className='h-9 px-4 py-2 rounded-md bg-green-500 text-white text-sm shadow-xs hover:bg-green-500/90'>Add Content</Link>
+     </div>
       <Card className="w-full max-w-md mx-auto">
         <CardHeader>
           <CardTitle>Edit Notebook</CardTitle>
@@ -86,6 +89,12 @@ const EditNotebook = async ({ params }: { params: { id: string } }) => {
                   </SelectContent>
                 </Select>
               </div>
+              {notebookData.content &&
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="content">Content</Label>
+                <Textarea id="content" name="content" defaultValue={notebookData.content} />
+              </div>
+            }
             </div>
             
             <div className="flex justify-between mt-6">

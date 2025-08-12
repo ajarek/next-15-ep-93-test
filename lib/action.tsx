@@ -119,6 +119,16 @@ export const addNotebook = async (formData:FormData) => {
       name,
       userId,
       column,
+      content: JSON.stringify({
+        type: "doc",
+        content: [
+          {
+            type: "heading",
+            attrs: { level: 1 },
+            content: [{ type: "text", text: "New Notebook" }],
+          },
+        ],
+      }),
     })
     console.log(newNotebook)
     await newNotebook.save()
@@ -172,6 +182,7 @@ export const updateNotebook = async (formData: FormData) => {
   const _id = formData.get('id') as string
   const name = formData.get('name') as string
   const column = formData.get('column') as string
+  const content = formData.get('content') as string
   if (!name) {
     return { error: 'Name is required' }
   }
@@ -180,9 +191,27 @@ export const updateNotebook = async (formData: FormData) => {
     await connectToDb()
     await Notebook.findByIdAndUpdate(_id, {
       name,
-      column
+      column,
+      content,
     })
     
+    revalidatePath('/dashboard')
+    return { status: 200 }
+  } catch (err) {
+    console.log(err)
+    return { error: 'Failed to update notebook' }
+  }
+}
+
+export const addContent = async (id: string, contentValue: string) => {
+  const _id = id
+  const content = contentValue
+  console.log(_id, content)
+  try {
+    await connectToDb()
+    await Notebook.findByIdAndUpdate(_id, {
+      content,
+    })
     revalidatePath('/dashboard')
     return { status: 200 }
   } catch (err) {

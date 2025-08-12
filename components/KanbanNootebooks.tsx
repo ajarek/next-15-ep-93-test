@@ -47,6 +47,7 @@ type KanbanNotebooksProps = {
 const KanbanNotebooks = ({ notebooks = [] }: KanbanNotebooksProps) => {
   // Przekształć notebooki na format wymagany przez KanbanProvider
   const initialFeatures = notebooks.slice(0, 12).map((notebook) => ({
+
     id: notebook._id,
     name: notebook.name,
     startAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30), // 30 dni temu
@@ -94,6 +95,7 @@ const KanbanNotebooks = ({ notebooks = [] }: KanbanNotebooksProps) => {
               {(feature: (typeof features)[number]) => (
                 <div className='relative' key={feature.id}>
                   <KanbanCard
+                    key={feature.id}
                     column={column.id}
                     id={feature.id}
                     name={feature.name}
