@@ -39,12 +39,14 @@ import {
 } from "lucide-react";
  import { addContent } from "@/lib/action";
 
+
 interface RichTextEditorProps {
   content?: JSONContent[];
   noteId?: string;
 }
 
 const RichTextEditor = ({ noteId }: RichTextEditorProps) => {
+  
   const editor = useEditor({
     extensions: [StarterKit, Document, paragraph, Text],
     immediatelyRender: false,
@@ -58,7 +60,8 @@ const RichTextEditor = ({ noteId }: RichTextEditorProps) => {
         
 
          addContent(noteId, JSON.stringify({ content }));
-      }
+        }
+       
     },
     content: {
       type: "doc",
@@ -387,8 +390,8 @@ const RichTextEditor = ({ noteId }: RichTextEditorProps) => {
 
         {/* Add Button */}
         <Button
-          variant="ghost"
-          size="sm"
+          variant=""
+          size=""
           className="h-8 px-2 text-muted-foreground hover:text-foreground hover:bg-accent gap-1"
         >
           <Plus className="h-4 w-4" />

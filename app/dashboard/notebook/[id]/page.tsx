@@ -19,7 +19,7 @@ const columns = [
 
 const EditNotebook = async ({ params }: { params: { id: string } }) => {
   const session = await auth()
-  const {id} = params
+  const {id} = await params
   if (!session) {
     redirect('/')
   }
@@ -89,12 +89,12 @@ const EditNotebook = async ({ params }: { params: { id: string } }) => {
                   </SelectContent>
                 </Select>
               </div>
-              {notebookData.content &&
+             
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="content">Content</Label>
                 <Textarea id="content" name="content" defaultValue={notebookData.content} />
               </div>
-            }
+            
             </div>
             
             <div className="flex justify-between mt-6">
