@@ -20,11 +20,9 @@ import { redirect } from 'next/navigation'
 
 const formSchema = z.object({
   username: z.string().min(1, 'User Name is required'),
-  email: z
-    .string()
-    .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, {
-      message: 'Email must be valid.',
-    }),
+  email: z.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, {
+    message: 'Email must be valid.',
+  }),
   password: z.string().min(1, 'Password is required'),
   img: z.string(),
 })
@@ -49,7 +47,7 @@ const RegisterForm = () => {
         img: (formData.img as string) || 'https://github.com/shadcn.png',
         isAdmin: false,
       }
-      
+
       await addUser(userData)
     } catch (error) {
       console.error(error)

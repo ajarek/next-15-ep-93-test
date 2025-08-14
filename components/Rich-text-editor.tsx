@@ -390,9 +390,8 @@ const RichTextEditor = ({ noteId }: RichTextEditorProps) => {
 
         {/* Add Button */}
         <Button
-          variant=""
-          size=""
-          className="h-8 px-2 text-muted-foreground hover:text-foreground hover:bg-accent gap-1"
+          
+          className="h-8 px-2  gap-1 cursor-pointer"
         >
           <Plus className="h-4 w-4" />
           Add

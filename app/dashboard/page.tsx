@@ -11,7 +11,6 @@ type Notebook = {
   _id: string
   name?: string
   column?: number
-
 }
 
 const Dashboard = async () => {
@@ -20,27 +19,29 @@ const Dashboard = async () => {
   if (!session) {
     redirect('/')
   }
-  // Pobierz notebooki i przekształć je na proste obiekty JavaScript
+
   const notebooksData = await getNotebooks(session.user?.id || '')
-  // Konwersja obiektów MongoDB na proste obiekty JavaScript
-  const Notebooks = notebooksData ? notebooksData.map((notebook: Notebook) => ({
-    _id: notebook._id.toString(),
-    name: notebook.name
-  })) : []
+
+  const Notebooks = notebooksData
+    ? notebooksData.map((notebook: Notebook) => ({
+        _id: notebook._id.toString(),
+        name: notebook.name,
+      }))
+    : []
   return (
     <div className=' min-h-screen flex flex-col justify-start items-center gap-4 '>
-      <Navbar label=''/>
+      <Navbar label='' />
 
       <div className='w-full h-full flex flex-col justify-start items-start gap-4 px-4'>
         <h1>Notebooks</h1>
         <CreateNotebook session={session} />
-        <KanbanNotebooks notebooks={Notebooks.map((notebook) => ({
-          key: notebook._id, // Add unique key prop
-          _id: notebook._id,
-          name: notebook.name || '' // Ensure name is always a string
-        }))} />
-
-       
+        <KanbanNotebooks
+          notebooks={Notebooks.map((notebook: Notebook) => ({
+            key: notebook._id,
+            _id: notebook._id,
+            name: notebook.name || '',
+          }))}
+        />
       </div>
     </div>
   )

@@ -34,7 +34,7 @@ const notebookSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, min: 3, max: 20 },
     userId: { type: String, required: true },
-    column: { type: String, default: '1' }, // Domyślnie 'Planned'
+    column: { type: String, default: '1' }, 
     content: { type: String, default: '' },
 
   },

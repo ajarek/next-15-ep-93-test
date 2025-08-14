@@ -1,16 +1,21 @@
-import { signIn } from "@/app/api/auth/auth"
-import { Button } from "./ui/button"
-import { FcGoogle } from "react-icons/fc";
- 
+import { signIn } from '@/app/api/auth/auth'
+import { Button } from './ui/button'
+import { FcGoogle } from 'react-icons/fc'
+
 export default function SignInGoogle() {
   return (
     <form
       action={async () => {
-        "use server"
-        await signIn("google")
+        'use server'
+        await signIn('google')
       }}
     >
-      <Button type="submit" className='w-full cursor-pointer'><FcGoogle /> Signin with Google</Button>
+      <Button
+        type='submit'
+        className='w-full cursor-pointer'
+      >
+        <FcGoogle /> Signin with Google
+      </Button>
     </form>
   )
-} 
+}

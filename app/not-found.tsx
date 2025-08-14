@@ -1,14 +1,12 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-
 import { Button } from '@/components/ui/button'
 
 const NotFoundPage = () => {
   const router = useRouter()
   return (
     <div className='w-full min-h-[calc(100vh-32px)] flex flex-col items-center justify-center gap-4 p-2'>
-     
       <h1 className='text-center text-3xl font-semibold tracking-widest '>
         404 Not Found
       </h1>

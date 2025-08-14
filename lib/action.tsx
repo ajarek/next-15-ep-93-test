@@ -106,7 +106,7 @@ export const resetPassword = async (formData: FormData) => {
   }
 }
 
-export const addNotebook = async (formData:FormData) => {
+export const addNotebook = async (formData: FormData) => {
   const name = formData.get('name') as string
   const userId = formData.get('userId') as string
   const column = formData.get('column') as string
@@ -120,12 +120,12 @@ export const addNotebook = async (formData:FormData) => {
       userId,
       column,
       content: JSON.stringify({
-        type: "doc",
+        type: 'doc',
         content: [
           {
-            type: "heading",
+            type: 'heading',
             attrs: { level: 1 },
-            content: [{ type: "text", text: "New Notebook" }],
+            content: [{ type: 'text', text: 'New Notebook' }],
           },
         ],
       }),
@@ -135,19 +135,17 @@ export const addNotebook = async (formData:FormData) => {
 
     revalidatePath('/dashboard')
     return { status: 200 }
-    
   } catch (err) {
     console.log(err)
   }
 }
 
-export const getNotebooks = async (userId: string)=>{
-  try{
+export const getNotebooks = async (userId: string) => {
+  try {
     await connectToDb()
-    const notebooks = await Notebook.find({userId})
-    // Konwertuj dokumenty MongoDB na zwykłe obiekty JavaScript
+    const notebooks = await Notebook.find({ userId })
     return JSON.parse(JSON.stringify(notebooks))
-  }catch (err) {
+  } catch (err) {
     console.log(err)
     return []
   }
@@ -157,7 +155,6 @@ export const getNotebookById = async (id: string) => {
   try {
     await connectToDb()
     const notebook = await Notebook.findById(id)
-    // Konwertuj dokument MongoDB na zwykły obiekt JavaScript
     return JSON.parse(JSON.stringify(notebook))
   } catch (err) {
     console.log(err)
@@ -186,7 +183,7 @@ export const updateNotebook = async (formData: FormData) => {
   if (!name) {
     return { error: 'Name is required' }
   }
-  
+
   try {
     await connectToDb()
     await Notebook.findByIdAndUpdate(_id, {
@@ -194,7 +191,7 @@ export const updateNotebook = async (formData: FormData) => {
       column,
       content,
     })
-    
+
     revalidatePath('/dashboard')
     return { status: 200 }
   } catch (err) {

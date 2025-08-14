@@ -45,7 +45,7 @@ type KanbanNotebooksProps = {
 }
 
 const KanbanNotebooks = ({ notebooks = [] }: KanbanNotebooksProps) => {
-  // Przekształć notebooki na format wymagany przez KanbanProvider
+  
   const initialFeatures = notebooks.slice(0, 12).map((notebook) => ({
 
     id: notebook._id,

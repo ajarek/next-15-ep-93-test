@@ -17,8 +17,7 @@ import Form from 'next/form'
 import { Session } from 'next-auth'
 import { redirect } from 'next/navigation'
 
-
-const CreateNotebook = ({session}: {session: Session}) => {
+const CreateNotebook = ({ session }: { session: Session }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -26,16 +25,13 @@ const CreateNotebook = ({session}: {session: Session}) => {
       </DialogTrigger>
       <DialogContent>
         <Form
-        
           action={async (formData: FormData) => {
             'use server'
             const result = await addNotebook(formData)
             if (result?.error) {
-              
               return
             }
             redirect('/dashboard')
-
           }}
         >
           <DialogHeader>
